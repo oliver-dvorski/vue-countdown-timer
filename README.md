@@ -1,29 +1,9 @@
-# countdown-timer
+# Countdown timer
 
-## Project setup
-```
-yarn install
-```
+Scripts are found in the package.json
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+## Goals
+- Display a timer with a CTA message when the page loads
+- Save an ID in local storage or somewhere to keep track of that user
+- Display the timer and message as a floading element
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Run your unit tests
-```
-yarn test:unit
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
