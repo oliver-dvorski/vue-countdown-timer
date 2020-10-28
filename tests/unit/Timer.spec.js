@@ -8,39 +8,32 @@ Object.defineProperty(window, 'localStorage', {
 })
 
 describe('Timer.vue', () => {
-  let component
-  describe(`If there's no time value in LocalStorage`, () => {
-    beforeEach(() => {
-      localStorage.clear()
+  let component = null
 
-      component = shallowMount(Timer)
-    })
-    it('saves the current time to local storage', () => {
-      expect(window.localStorage.getItem('countdownTimerTime')).toBe(
-        new Date().toLocaleTimeString()
-      )
-    })
-
-    afterEach(() => {
-      component.destroy()
-    })
+  beforeEach(() => {
+    localStorage.clear()
   })
 
-  describe(`If there's already a time value in LocalStorage`, () => {
+  it(`Initialises with localStorage`, () => {
+    component = shallowMount(Timer)
+
+    expect(window.localStorage.getItem('countdownTimerTime')).toBe(
+      new Date().toLocaleTimeString()
+    )
+  })
+
+  it(`acknowledges values previously set in localStorage`, () => {
     const twentyMinutesAgo = subMinutes(Date.now(), 20).toLocaleTimeString()
+    window.localStorage.setItem('countdownTimerTime', twentyMinutesAgo)
+    component = shallowMount(Timer)
+    expect(window.localStorage.getItem('countdownTimerTime')).toBe(
+      twentyMinutesAgo
+    )
+  })
 
-    beforeEach(() => {
-      window.localStorage.setItem('countdownTimerTime', twentyMinutesAgo)
-
-      component = shallowMount(Timer)
-    })
-
-    it(`Will not modify the time in storage`, () => {
-      expect(window.localStorage.getItem('countdownTimerTime')).toBe(twentyMinutesAgo)
-    })
-    afterEach(() => {
+  afterEach(() => {
+    if (component !== null) {
       component.destroy()
-      window.localStorage.clear()
-    })
+    }
   })
 })
