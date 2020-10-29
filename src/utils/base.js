@@ -1,5 +1,5 @@
 function isFirstRun () {
-  return window.localStorage.getItem('countdownTimerTime') === null
+  return window.localStorage.getItem('countdownTimerTarget') === null
 }
 
 export {
