@@ -1,5 +1,5 @@
 <template>
-  <span>{{ displayValue }}</span>
+  <span class="od-timer">{{ displayValue }}</span>
 </template>
 
 <script>
