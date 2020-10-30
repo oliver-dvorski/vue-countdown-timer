@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <Timer/>
+    <Banner text="CTA Text >" href="special-link"/>
   </div>
 </template>
 
 <script>
-import Timer from './components/Timer.vue'
+import Banner from './components/Banner.vue'
 
 export default {
   name: 'app',
   components: {
-    Timer
+    Banner
   }
 }
 </script>
