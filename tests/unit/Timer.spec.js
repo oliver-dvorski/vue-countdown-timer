@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils'
 import Timer from '@/components/Timer.vue'
 import { LocalStorageMock } from './mocks/LocalStorage.mock'
-import { addMinutes } from 'date-fns'
+import { addMinutes, subMinutes } from 'date-fns'
 import Vue from 'Vue'
 
 jest.useFakeTimers()
@@ -59,7 +59,7 @@ describe('Timer.vue', () => {
   it('Calls the refreshDisplay method every second', () => {
     const refreshDisplay = jest.fn()
 
-    component = shallowMount(Timer, {
+    shallowMount(Timer, {
       methods: {
         refreshDisplay
       }
@@ -70,6 +70,18 @@ describe('Timer.vue', () => {
     jest.advanceTimersByTime(1000)
 
     expect(refreshDisplay).toHaveReturnedTimes(2)
+  })
+
+  it('stops the countdown when the target time is in the past', async () => {
+    const component = shallowMount(Timer, {
+      propsData: {
+        target: subMinutes(Date.now(), 1)
+      }
+    })
+
+    await Vue.nextTick()
+
+    expect(component.text()).toBe('00:00:00')
   })
 
   afterEach(() => {

@@ -17,7 +17,8 @@ export default {
 
   data () {
     return {
-      displayValue: ''
+      displayValue: '',
+      interval: null
     }
   },
 
@@ -37,6 +38,12 @@ export default {
       const now = Date.now()
 
       const diff = targetTime - now
+
+      if (diff < 0) {
+        this.displayValue = '00:00:00'
+        clearInterval(this.interval)
+        return
+      }
 
       const hours = this.twoDigits(
         Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
@@ -61,7 +68,7 @@ export default {
 
     this.refreshDisplay()
 
-    setInterval(this.refreshDisplay, 1000)
+    this.interval = setInterval(this.refreshDisplay, 1000)
   }
 }
 </script>
