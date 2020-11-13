@@ -2,7 +2,7 @@ import { shallowMount } from '@vue/test-utils'
 import Timer from '@/components/Timer.vue'
 import { LocalStorageMock } from './mocks/LocalStorage.mock'
 import { addMinutes, subMinutes } from 'date-fns'
-import Vue from 'Vue'
+import Vue from 'vue'
 
 jest.useFakeTimers()
 
